@@ -4,7 +4,7 @@ using UnityEngine.SceneManagement;
 public class GameManager : MonoBehaviour
 {
     private float Score = 0f;
-    private float Timer = 0f;
+    private float Timer = 60f;
 
     public float _score
     {
@@ -37,13 +37,14 @@ public class GameManager : MonoBehaviour
     private void FixedUpdate()
     {
         Timer -= 1;
+        TimerToZero();
     }
 
     private void TimerToZero()
     {
         if (Timer <= 0f)
         {
-            Debug.Log("Your Dead...");
+            Debug.Log("Your Dead....");
         }
     }
 
@@ -71,4 +72,6 @@ public class GameManager : MonoBehaviour
             Application.Quit();
         }
     }
+    
+    
 }
