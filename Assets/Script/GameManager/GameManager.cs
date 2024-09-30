@@ -4,7 +4,8 @@ using UnityEngine.SceneManagement;
 public class GameManager : MonoBehaviour
 {
     private float Score = 0f;
-    private float Timer = 60f;
+    private float Timer = 0f;
+    private float CurrentTimer = 0f;
 
     public float _score
     {
@@ -31,12 +32,14 @@ public class GameManager : MonoBehaviour
             Destroy(this);
         }
 
+        CurrentTimer = Timer;
+
         DontDestroyOnLoad(this);
     }
 
     private void FixedUpdate()
     {
-        Timer -= 1;
+        CurrentTimer--;
         TimerToZero();
     }
 
@@ -48,19 +51,11 @@ public class GameManager : MonoBehaviour
         }
     }
 
-    public void IncreaseScore(float _score)
+    public void NextLevel(float _levelTime)
     {
-        Score += _score;
-    }
-
-    public void DecreaseScore(float _score)
-    {
-        Score -= _score;
-    }
-
-    public void NextLevel()
-    {
+        NormalizeScore(1, _levelTime);
         CurrentScene++;
+        CurrentTimer = Timer;
         SceneManager.LoadScene(CurrentScene);
         End();
     }
@@ -72,6 +67,11 @@ public class GameManager : MonoBehaviour
             Application.Quit();
         }
     }
-    
-    
+
+    private void NormalizeScore(int multiplicateur, float _levelTime)
+    {
+        float _normalizedTimer = CurrentTimer / _levelTime;
+
+        Score = Score + _normalizedTimer * multiplicateur;
+    }
 }
