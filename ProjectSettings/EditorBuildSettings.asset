@@ -45,7 +45,7 @@ EditorBuildSettings:
     path: Assets/Scenes/Doryan Mausservey/Doryan_Plateformer.unity
     guid: e914c6229c8f29842bb8a54c1cc6286f
   - enabled: 1
-    path: Assets/Scenes/Doryan Duchassin/Doryan_Plateformer.unity
+    path: Assets/Scenes/Dorian Duchassin/Dorian_Plateformer.unity
     guid: 763e62a9a3988964e9887f25c3002c4d
   - enabled: 1
     path: Assets/Scenes/Baptiste/Baptiste_Plateformer.unity
