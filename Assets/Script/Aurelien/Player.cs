@@ -5,9 +5,13 @@ public class Player : MonoBehaviour
 
     [SerializeField] private float upAndDownSpeed;
     [SerializeField] private float swimingSpeed;
-    [SerializeField] CameraMovements cameraMovement;
 
+    [SerializeField] private float minCamX;
+    [SerializeField] private float maxCamX;
+    
     private Rigidbody2D rb;
+    private Transform _transform;
+    private Transform camTransform;
 
     private bool isSwimingUpOrDown;
 
@@ -15,6 +19,8 @@ public class Player : MonoBehaviour
     void Start()
     {
         rb = GetComponent<Rigidbody2D>();
+        _transform = transform;
+        camTransform = transform.parent;
     }
 
     
@@ -29,15 +35,19 @@ public class Player : MonoBehaviour
 
     private void Deplacement()
     {
-        if (Input.GetKey(KeyCode.D) || Input.GetKey(KeyCode.LeftArrow))
+        if (Input.GetKey(KeyCode.Q) || Input.GetKey(KeyCode.LeftArrow))
         {
-            transform.position = new Vector2(transform.position.x - swimingSpeed * Time.deltaTime, transform.position.y);
-            cameraMovement.MoveCamera(transform);
+            if(!(camTransform.position.x <= minCamX) && camTransform.position.x >= _transform.position.x)
+                camTransform.position = new Vector3(camTransform.position.x - swimingSpeed * Time.deltaTime, camTransform.position.y, -10);
+            else
+                transform.position = new Vector2(_transform.position.x - swimingSpeed * Time.deltaTime, _transform.position.y);
         }
-        else if (Input.GetKey(KeyCode.Q) || Input.GetKey(KeyCode.RightArrow))
+        else if (Input.GetKey(KeyCode.D) || Input.GetKey(KeyCode.RightArrow))
         {
-            transform.position = new Vector2(transform.position.x + swimingSpeed * Time.deltaTime, transform.position.y);
-            cameraMovement.MoveCamera(transform);
+            if (!(camTransform.position.x >= maxCamX) && camTransform.position.x <= _transform.position.x)
+                camTransform.position = new Vector3(camTransform.position.x + swimingSpeed * Time.deltaTime, camTransform.position.y, -10);
+            else
+                transform.position = new Vector2(_transform.position.x + swimingSpeed * Time.deltaTime, _transform.position.y);
         }
         
         if (Input.GetKey(KeyCode.Z) || Input.GetKey(KeyCode.UpArrow))
