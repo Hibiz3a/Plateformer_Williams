@@ -4,6 +4,7 @@
 TagManager:
   serializedVersion: 2
   tags:
+  - Exit
   - Floor
   - HF_EnterMaze
   - HF_HitWall
