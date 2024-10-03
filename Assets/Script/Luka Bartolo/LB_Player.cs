@@ -3,8 +3,8 @@ using UnityEngine;
 public class LB_Player : MonoBehaviour
 {
     private Rigidbody2D _rb;
-    private float _mouvementSpeed = 10f;
-    private float _jumpHeight = 25f;
+    private float MouvementSpeed = 10f;
+
     public GameObject player;
 
     // Start is called before the first frame update
@@ -17,11 +17,11 @@ public class LB_Player : MonoBehaviour
     {
         if (Input.GetKey(KeyCode.A) || Input.GetKey(KeyCode.LeftArrow))
         {
-            _rb.AddForce(Vector2.left * _mouvementSpeed);
+            _rb.AddForce(Vector2.left * MouvementSpeed);
         }
         else if (Input.GetKey(KeyCode.D) || Input.GetKey(KeyCode.RightArrow))
         {
-            _rb.AddForce(Vector2.right * _mouvementSpeed);
+            _rb.AddForce(Vector2.right * MouvementSpeed);
         }
     }
 }
