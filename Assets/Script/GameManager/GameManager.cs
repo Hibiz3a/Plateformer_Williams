@@ -1,18 +1,25 @@
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class GameManager : MonoBehaviour
 {
     private float Score = 0f;
     private float Timer = 0f;
+    private float CurrentTimer = 0f;
+
     public float _score
     {
         get { return Score; }
     }
+
     public float _timer
     {
         get { return Timer; }
     }
+
     public static GameManager Instance;
+
+    private int CurrentScene;
 
     void Start()
     {
@@ -25,31 +32,46 @@ public class GameManager : MonoBehaviour
             Destroy(this);
         }
 
+        CurrentTimer = Timer;
+
         DontDestroyOnLoad(this);
     }
 
     private void FixedUpdate()
     {
-        Timer -= 1;
+        CurrentTimer--;
+        TimerToZero();
     }
 
     private void TimerToZero()
     {
         if (Timer <= 0f)
         {
-            Debug.Log("Your Dead...");
+            Debug.Log("Your Dead....");
         }
     }
-    
-    public void IncreaseScore(float _score)
+
+    public void NextLevel(float _levelTime)
     {
-        Score += _score;
+        NormalizeScore(1, _levelTime);
+        CurrentScene++;
+        CurrentTimer = Timer;
+        SceneManager.LoadScene(CurrentScene);
+        End();
     }
 
-    public void DecreaseScore(float _score)
+    private void End()
     {
-        Score -= _score;
+        if (CurrentScene == 15)
+        {
+            Application.Quit();
+        }
     }
-    
-    
+
+    private void NormalizeScore(int multiplicateur, float _levelTime)
+    {
+        float _normalizedTimer = CurrentTimer / _levelTime;
+
+        Score = Score + _normalizedTimer * multiplicateur;
+    }
 }
