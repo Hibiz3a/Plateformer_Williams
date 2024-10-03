@@ -1,13 +1,17 @@
 using UnityEngine;
+using UnityEngine.UIElements;
 
 public class MG_ObstacleManager : MonoBehaviour
 {
     private float InitPos;
-    private float MoveSpeed = 1.5f;
+    private Vector2 BackupPos;
+    public float MoveSpeed = 1.5f;
     [SerializeField] MG_Player PlayerSC;
+    public bool ObstacleIsOnFinishPlatform = false;
     private void Start()
     {
         InitPos = transform.position.y;
+        BackupPos = transform.position;
     }
 
     private void Update()
@@ -20,6 +24,16 @@ public class MG_ObstacleManager : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D _collision)
     {
-        Destroy(_collision.gameObject);
+        if (_collision.CompareTag("Player"))
+        {
+            RestartLevels();
+        }
+    }
+
+    private void RestartLevels()
+    {
+        PlayerSC.IsOnFirstPlatform = false;
+        transform.position = BackupPos;
+        PlayerSC.transform.position = PlayerSC.InitPos;
     }
 }
