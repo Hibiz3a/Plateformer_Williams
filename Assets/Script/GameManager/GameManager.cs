@@ -1,10 +1,14 @@
 using System.Collections;
+using TMPro;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
 public class GameManager : MonoBehaviour
 {
     [SerializeField] private CanvasGroup fadeInFadeOutCanvasGroup;
+
+    [SerializeField] private TextMeshProUGUI ScoreGUI;
+    [SerializeField] private TextMeshProUGUI TimeGUI;
     
     private float Score = 0f;
     private float Timer = 0f;
@@ -26,6 +30,9 @@ public class GameManager : MonoBehaviour
 
     void Start()
     {
+        ScoreGUI.text = "Score : " + Mathf.RoundToInt(Score);
+        TimeGUI.text = "Time : " + CurrentTimer;
+
         if (Instance == null)
         {
             Instance = this;
@@ -43,6 +50,7 @@ public class GameManager : MonoBehaviour
     private void Update()
     {
         CurrentTimer += Time.deltaTime;
+        TimeGUI.text = "Time : " + Mathf.RoundToInt(CurrentTimer);
         //TimerToZero();
     }
 
@@ -62,6 +70,7 @@ public class GameManager : MonoBehaviour
         End();
         SceneManager.LoadScene(CurrentScene);
         CurrentTimer = Timer;
+        ScoreGUI.text = "Score : " + Mathf.RoundToInt(Score);
     }
 
     private IEnumerator FadeInFadeOut()
