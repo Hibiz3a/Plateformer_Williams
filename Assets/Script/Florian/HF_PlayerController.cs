@@ -2,6 +2,7 @@ using UnityEngine;
 
 public class HF_PlayerController : MonoBehaviour
 {
+    Vector2 StartPos;
     Vector2 Dir;
     private float Horizontal;
     private float Vertical;
@@ -13,6 +14,7 @@ public class HF_PlayerController : MonoBehaviour
     private void Start()
     {
         Rb = GetComponent<Rigidbody2D>();
+        StartPos = transform.position;
     }
 
     // Update is called once per frame
@@ -44,9 +46,15 @@ public class HF_PlayerController : MonoBehaviour
     {
         if (collision.gameObject.CompareTag("HF_HitWall"))
         {
-
-
+            Respawn();
             Debug.Log("!!!!");
         }
+    }
+
+    private void Respawn()
+    {
+        transform.position = StartPos;
+        // couper la dernière direction de mouvement
+        Dir = Vector2.zero;
     }
 }
