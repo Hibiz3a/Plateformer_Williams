@@ -5,6 +5,8 @@ TagManager:
   serializedVersion: 2
   tags:
   - IsGround
+  - Teleporter
+  - BouncePad
   layers:
   - Default
   - TransparentFX
@@ -12,9 +14,9 @@ TagManager:
   - 
   - Water
   - UI
-  - Culling Player
-  - Culling Environnement
   - 
+  - 
+  - Culling Player
   - 
   - 
   - 

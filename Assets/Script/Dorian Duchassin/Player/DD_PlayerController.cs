@@ -5,13 +5,21 @@ namespace DD
     public class DD_PlayerController : MonoBehaviour
     {
 
-        Rigidbody2D _rb;
+        private Rigidbody2D _rb;
         private float _horizontal;
 
         [SerializeField] private int sizeInPixel = 9;
         [SerializeField] private float movementSpeed = 2.0f;
         [SerializeField] private float powerJump = 10.0f;
         [SerializeField] private bool isGrounded = false;
+
+
+
+        public Rigidbody2D Rb {
+            get => _rb;
+            private set => _rb = value;
+        }
+
 
         private void Awake()
         {
@@ -25,7 +33,7 @@ namespace DD
 
             if (Input.GetKeyDown(KeyCode.Space) && IsGrounded())
             {
-                _rb.AddForce(new Vector2(0, powerJump), ForceMode2D.Impulse);
+                Rb.AddForce(new Vector2(0, powerJump), ForceMode2D.Impulse);
             }
 
             if (Input.GetKeyDown(KeyCode.J))
@@ -36,7 +44,7 @@ namespace DD
 
         private void FixedUpdate()
         {
-            _rb.velocity = new Vector2(_horizontal * movementSpeed, _rb.velocity.y);
+            Rb.velocity = new Vector2(_horizontal * movementSpeed, Rb.velocity.y);
         }
 
         private bool IsGrounded()
@@ -47,16 +55,17 @@ namespace DD
 
         private void OnCollisionEnter2D(Collision2D collision)
         {
-            if (collision.gameObject.tag == "IsGround")
+            if (collision.gameObject.CompareTag("IsGround"))
                 isGrounded = true;
         }
 
         private void OnCollisionExit2D(Collision2D collision)
         {
-            if (collision.gameObject.tag == "IsGround")
+            if (collision.gameObject.CompareTag("IsGround"))
                 isGrounded = false;
         }
 
+        // TO Have the perfect pixel
         void ResizeSpriteToPixels(int nbPixel)
         {
             Camera cam = Camera.main;
