@@ -26,7 +26,7 @@ public class GameManager : MonoBehaviour
 
     public static GameManager Instance;
 
-    private int CurrentScene;
+    private int CurrentScene = 0;
 
     void Start()
     {
@@ -65,10 +65,10 @@ public class GameManager : MonoBehaviour
     public void NextLevel(float _levelTime, int _levelscore = 100)
     {
         StartCoroutine(FadeInFadeOut());
-        NormalizeScore(_levelscore, _levelTime);
         CurrentScene++;
         End();
         SceneManager.LoadScene(CurrentScene);
+        NormalizeScore(_levelscore, _levelTime);
         CurrentTimer = Timer;
         ScoreGUI.text = "Score : " + Mathf.RoundToInt(Score);
     }
@@ -95,7 +95,7 @@ public class GameManager : MonoBehaviour
     
     private void End()
     {
-        if (CurrentScene == 15)
+        if (CurrentScene >= 15)
         {
             Application.Quit();
         }
