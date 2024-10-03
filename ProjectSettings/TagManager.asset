@@ -7,18 +7,27 @@ TagManager:
   - IsGround
   - Teleporter
   - BouncePad
+  - Exit
+  - Floor
+  - HF_EnterMaze
+  - HF_HitWall
   layers:
   - Default
   - TransparentFX
   - Ignore Raycast
-  - 
+  - Nathan_Ground
   - Water
   - UI
   - 
+  - Nathan_Kill
+  - Ground
   - 
   - Culling Player
   - 
   - 
+  - Ground
+  - 
+  - Ground
   - 
   - 
   - 
