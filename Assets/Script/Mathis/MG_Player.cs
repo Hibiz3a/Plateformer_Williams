@@ -79,5 +79,17 @@ public class MG_Player : MonoBehaviour
         {
             IsOnFirstPlatform = true;
         }
+        if(_collision.collider.name == "EndPlatform")
+        {
+            StartCoroutine(Timer());
+        }
     }
+
+    private IEnumerator Timer()
+    {
+        end.PlayerIsOnEndPlatform = true;
+        yield return new WaitForSeconds(2.0f);
+        IsOnFirstPlatform = false;
+        yield return null;
+    }   
 }
