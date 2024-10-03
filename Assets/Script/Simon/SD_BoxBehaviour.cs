@@ -15,6 +15,7 @@ public class SD_BoxBehaviour : MonoBehaviour
         TimeLimit -= Time.deltaTime;
         if (TimeLimit <= 0f)
         {
+            Player.CurrentBoxNumber--;
             Destroy(gameObject);
         }
     }

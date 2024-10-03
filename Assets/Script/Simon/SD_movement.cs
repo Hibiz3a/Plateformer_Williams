@@ -24,6 +24,7 @@ public class SD_movement : MonoBehaviour
 
     private void Update()
     {
+        FallCheck();
         if (Input.GetKeyDown(KeyCode.Space))
         {
             if (IsGrounded)
@@ -111,6 +112,14 @@ public class SD_movement : MonoBehaviour
         if (Input.GetMouseButtonUp(0))
         {
             IsHoldingBox = false;
+        }
+    }
+
+    private void FallCheck()
+    {
+        if (transform.position.y < -5)
+        {
+            transform.position = new Vector3(-8, 5, 0);
         }
     }
 
