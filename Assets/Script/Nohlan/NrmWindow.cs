@@ -4,7 +4,7 @@ using UnityEngine;
 public class NrmWindow : MonoBehaviour {
     [SerializeField] Camera Camera;
     [SerializeField]Rigidbody2D PlayerBody;
-    float _pixelsPerUnit = 100f;
+    float PixelsPerUnit = 100f;
 
 
     //For Moving the gameWindow (use user32.dll from Windows API)
@@ -27,8 +27,8 @@ public class NrmWindow : MonoBehaviour {
         float worldHeight = cameraHeight;
         float worldWidth = worldHeight * Display.main.systemWidth / Display.main.systemHeight;
 
-        int windowWidthInPixels = (int)(worldWidth * _pixelsPerUnit);
-        int windowHeightInPixels = (int)(worldHeight * _pixelsPerUnit);
+        int windowWidthInPixels = (int)(worldWidth * PixelsPerUnit);
+        int windowHeightInPixels = (int)(worldHeight * PixelsPerUnit);
 
         Screen.SetResolution(windowWidthInPixels, windowHeightInPixels, false);
     }
@@ -38,13 +38,13 @@ public class NrmWindow : MonoBehaviour {
     }
 
     void MoveWindow(Vector3 _playerPosition) {
-
+        Camera.transform.position = new Vector3(PlayerBody.position.x, PlayerBody.position.y, Camera.transform.position.z);
         System.IntPtr gameWindow = FindWindow(null, "Plateformer_Williams");
 
         if (gameWindow != System.IntPtr.Zero) {
-            Camera.transform.position = new Vector3(PlayerBody.position.x, PlayerBody.position.y, Camera.transform.position.z);
-            int gameWindowX = Mathf.RoundToInt((Display.main.systemWidth / 2 - Screen.width / 2) + (_playerPosition.x * _pixelsPerUnit));
-            int gameWindowY = Mathf.RoundToInt((Display.main.systemHeight / 2 - Screen.height / 2) + (-_playerPosition.y * (_pixelsPerUnit - 5)));
+
+            int gameWindowX = Mathf.RoundToInt((Display.main.systemWidth / 2 - Screen.width / 2) + (_playerPosition.x * PixelsPerUnit));
+            int gameWindowY = Mathf.RoundToInt((Display.main.systemHeight / 2 - Screen.height / 2) + (-_playerPosition.y * (PixelsPerUnit - 5)));
 
             SetWindowPos(gameWindow, System.IntPtr.Zero, gameWindowX, gameWindowY, 0, 0, SWP_NOSIZE);
         }

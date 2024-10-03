@@ -7,14 +7,18 @@ public class NrmBorderCollider : MonoBehaviour {
     {
         SpriteRenderer spriteRenderer = GetComponent<SpriteRenderer>();
         PolygonCollider2D polygonCollider = gameObject.AddComponent<PolygonCollider2D>();
-        polygonCollider.pathCount = spriteRenderer.sprite.GetPhysicsShapeCount();
 
-        List<Vector2> path = new List<Vector2>();
-        for (int i = 0; i < polygonCollider.pathCount; i++) {
+        // Récupère le nombre de formes physiques du sprite
+        int shapeCount = spriteRenderer.sprite.GetPhysicsShapeCount();
+        polygonCollider.pathCount = shapeCount;
+
+        for (int i = 0; i < shapeCount; i++)
+        {
+            List<Vector2> path = new List<Vector2>();  // Créer une nouvelle liste pour chaque forme
             spriteRenderer.sprite.GetPhysicsShape(i, path);
             polygonCollider.SetPath(i, path.ToArray());
         }
     }
 
-  
+
 }
