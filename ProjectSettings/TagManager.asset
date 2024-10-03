@@ -4,6 +4,9 @@
 TagManager:
   serializedVersion: 2
   tags:
+  - IsGround
+  - Teleporter
+  - BouncePad
   - Exit
   - Floor
   - HF_EnterMaze
@@ -18,6 +21,9 @@ TagManager:
   - 
   - Nathan_Kill
   - Ground
+  - 
+  - Culling Player
+  - 
   - 
   - Ground
   - 
