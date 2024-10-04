@@ -1234,14 +1234,66 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 14528034090432171, guid: db18f6b8005b7d849b38c54ba038e6a6, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 501060417206619286, guid: db18f6b8005b7d849b38c54ba038e6a6, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 1131287402524334396, guid: db18f6b8005b7d849b38c54ba038e6a6, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 8
+      objectReference: {fileID: 0}
+    - target: {fileID: 1180864564876003901, guid: db18f6b8005b7d849b38c54ba038e6a6, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: -8
+      objectReference: {fileID: 0}
+    - target: {fileID: 1620281966680044814, guid: db18f6b8005b7d849b38c54ba038e6a6, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 3
+      objectReference: {fileID: 0}
     - target: {fileID: 1699661796454514475, guid: db18f6b8005b7d849b38c54ba038e6a6, type: 3}
       propertyPath: m_Name
       value: BrickList
+      objectReference: {fileID: 0}
+    - target: {fileID: 1886192505830437254, guid: db18f6b8005b7d849b38c54ba038e6a6, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 8
+      objectReference: {fileID: 0}
+    - target: {fileID: 3928467135663903816, guid: db18f6b8005b7d849b38c54ba038e6a6, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: -8
+      objectReference: {fileID: 0}
+    - target: {fileID: 4457915067858955636, guid: db18f6b8005b7d849b38c54ba038e6a6, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5236120169850122881, guid: db18f6b8005b7d849b38c54ba038e6a6, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: -3
       objectReference: {fileID: 0}
     - target: {fileID: 5570250086165091535, guid: db18f6b8005b7d849b38c54ba038e6a6, type: 3}
       propertyPath: End
       value: 
       objectReference: {fileID: 1150063777}
+    - target: {fileID: 5772948258255678092, guid: db18f6b8005b7d849b38c54ba038e6a6, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: -5
+      objectReference: {fileID: 0}
+    - target: {fileID: 6500428838960916078, guid: db18f6b8005b7d849b38c54ba038e6a6, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: -5
+      objectReference: {fileID: 0}
+    - target: {fileID: 7103195280165626059, guid: db18f6b8005b7d849b38c54ba038e6a6, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 7217029497354611347, guid: db18f6b8005b7d849b38c54ba038e6a6, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: -3
+      objectReference: {fileID: 0}
     - target: {fileID: 7460162914868496823, guid: db18f6b8005b7d849b38c54ba038e6a6, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0
@@ -1281,6 +1333,10 @@ PrefabInstance:
     - target: {fileID: 7460162914868496823, guid: db18f6b8005b7d849b38c54ba038e6a6, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 9130880013900169376, guid: db18f6b8005b7d849b38c54ba038e6a6, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 5
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
