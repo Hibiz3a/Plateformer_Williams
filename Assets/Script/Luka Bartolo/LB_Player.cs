@@ -2,9 +2,9 @@ using UnityEngine;
 
 public class LB_Player : MonoBehaviour
 {
+    [SerializeField] private ParticleSystem _speedParticles;
     private Rigidbody2D _rb;
     private float _mouvementSpeed = 10f;
-    private float _jumpHeight = 25f;
     public GameObject player;
 
     // Start is called before the first frame update
@@ -19,9 +19,26 @@ public class LB_Player : MonoBehaviour
         {
             _rb.AddForce(Vector2.left * _mouvementSpeed);
         }
+
         else if (Input.GetKey(KeyCode.D) || Input.GetKey(KeyCode.RightArrow))
         {
             _rb.AddForce(Vector2.right * _mouvementSpeed);
+        }
+        SpeedParticles();
+    }
+
+    void SpeedParticles()
+    {
+        var _particlesMainSettings = _speedParticles.main;
+        if (_rb.velocity.y <= 20)
+        {
+            _speedParticles.Stop();
+            _particlesMainSettings.startLifetime = 0.2f;
+        }
+        else
+        {
+            _speedParticles.Play();
+            _particlesMainSettings.startLifetime = _rb.velocity.y / 100;
         }
     }
 }
