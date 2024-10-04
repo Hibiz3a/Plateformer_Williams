@@ -7,6 +7,7 @@ public class RaquetteMovement : MonoBehaviour
     //[SerializeField] GameObject m_raquette;
     [SerializeField] Rigidbody2D m_raquetteRB;
     private float m_RaquetteVelocity=-4;
+    float timer = 0;
 
     private void Start()
     {
@@ -23,8 +24,15 @@ public class RaquetteMovement : MonoBehaviour
     }
     public IEnumerator returnToBaseScale()
     {
-        yield return new WaitForSeconds(10);
+        while (timer <5) 
+        {
+
+            timer += Time.deltaTime;
+
+            yield return new WaitForEndOfFrame();
+
+        }
+
         transform.localScale = new Vector3(4, 0.25f, 1);
-        yield break;
     }
 }

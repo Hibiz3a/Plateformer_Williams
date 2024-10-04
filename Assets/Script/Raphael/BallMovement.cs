@@ -83,6 +83,10 @@ public class BallMovement : MonoBehaviour
         {
             BallRB.gameObject.transform.position += new Vector3(-0, -1);
         }
+        if(Mathf.Abs(BallRB.velocity.x)<0.1f && Mathf.Abs(BallRB.velocity.y) < 0.1f)
+        {
+            transform.position = new Vector3(transform.position.x, transform.position.y - 2, transform.position.z);
+        }
     }
 
 
