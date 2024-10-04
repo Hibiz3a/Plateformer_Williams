@@ -12,6 +12,10 @@ TagManager:
   - Floor
   - HF_EnterMaze
   - HF_HitWall
+  - HF_Door1
+  - HF_Door2
+  - HF_HitButton1
+  - HF_HitButton2
   layers:
   - Default
   - TransparentFX
