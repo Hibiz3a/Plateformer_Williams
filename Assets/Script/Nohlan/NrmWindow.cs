@@ -1,4 +1,5 @@
 using System.Runtime.InteropServices;
+using System.Collections;
 using UnityEngine;
 
 public class NrmWindow : MonoBehaviour {
@@ -31,22 +32,28 @@ public class NrmWindow : MonoBehaviour {
         int windowHeightInPixels = (int)(worldHeight * PixelsPerUnit);
 
         Screen.SetResolution(windowWidthInPixels, windowHeightInPixels, false);
+
+        StartCoroutine(MoveWindow());
     }
 
-    void FixedUpdate() {
-        MoveWindow(PlayerBody.position);
-    }
+    IEnumerator MoveWindow(){
 
-    void MoveWindow(Vector3 _playerPosition) {
-        Camera.transform.position = new Vector3(PlayerBody.position.x, PlayerBody.position.y, Camera.transform.position.z);
+        
         System.IntPtr gameWindow = FindWindow(null, "Plateformer_Williams");
+        while (true) {
+            Camera.transform.position = new Vector3(PlayerBody.position.x, PlayerBody.position.y, Camera.transform.position.z);
+            if (gameWindow != System.IntPtr.Zero) {
 
-        if (gameWindow != System.IntPtr.Zero) {
-
-            int gameWindowX = Mathf.RoundToInt((Display.main.systemWidth / 2 - Screen.width / 2) + (_playerPosition.x * PixelsPerUnit));
-            int gameWindowY = Mathf.RoundToInt((Display.main.systemHeight / 2 - Screen.height / 2) + (-_playerPosition.y * (PixelsPerUnit - 5)));
-
-            SetWindowPos(gameWindow, System.IntPtr.Zero, gameWindowX, gameWindowY, 0, 0, SWP_NOSIZE);
+                int gameWindowX = Mathf.RoundToInt((Display.main.systemWidth / 2 - Screen.width / 2) + (PlayerBody.position.x * PixelsPerUnit));
+                int gameWindowY = Mathf.RoundToInt((Display.main.systemHeight / 2 - Screen.height / 2) + (-PlayerBody.position.y * (PixelsPerUnit - 5)));
+                yield return StartCoroutine(SetWindowPosition(gameWindow,gameWindowX,gameWindowY));
+            }
         }
+    }
+
+    public static IEnumerator SetWindowPosition(System.IntPtr window, int x, int y){
+        yield return new WaitForEndOfFrame();
+        yield return new WaitForEndOfFrame();
+        SetWindowPos(window, System.IntPtr.Zero, x, y, 0, 0, SWP_NOSIZE);
     }
 }
