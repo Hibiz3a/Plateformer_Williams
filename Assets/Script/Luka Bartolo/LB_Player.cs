@@ -4,7 +4,9 @@ public class LB_Player : MonoBehaviour
 {
     [SerializeField] private ParticleSystem _speedParticles;
     private Rigidbody2D _rb;
-    private float _mouvementSpeed = 10f;
+
+    private float MouvementSpeed = 10f;
+
     public GameObject player;
 
     // Start is called before the first frame update
@@ -17,12 +19,12 @@ public class LB_Player : MonoBehaviour
     {
         if (Input.GetKey(KeyCode.A) || Input.GetKey(KeyCode.LeftArrow))
         {
-            _rb.AddForce(Vector2.left * _mouvementSpeed);
+            _rb.AddForce(Vector2.left * MouvementSpeed);
         }
 
         else if (Input.GetKey(KeyCode.D) || Input.GetKey(KeyCode.RightArrow))
         {
-            _rb.AddForce(Vector2.right * _mouvementSpeed);
+            _rb.AddForce(Vector2.right * MouvementSpeed);
         }
         SpeedParticles();
     }
