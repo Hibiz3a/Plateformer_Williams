@@ -11,7 +11,9 @@ public class GameManager : MonoBehaviour
     [SerializeField] private TextMeshProUGUI ScoreGUI;
     [SerializeField] private TextMeshProUGUI TimeGUI;
     [SerializeField] private TextMeshProUGUI LevelGUI;
-
+    [SerializeField] private TextMeshProUGUI ScoreGainGUI;
+    [SerializeField] private GameObject EndLevel;
+    
     private float Score = 0f;
     private float Timer = 0f;
     private float CurrentTimer = 0f;
@@ -33,6 +35,7 @@ public class GameManager : MonoBehaviour
 
     void Start()
     {
+        EndLevel.SetActive(false);
         ScoreGUI.text = "Score : " + Mathf.RoundToInt(Score);
         TimeGUI.text = "Time : " + CurrentTimer;
         LevelGUI.text = "Niveau : " + 1;
@@ -71,11 +74,20 @@ public class GameManager : MonoBehaviour
 
     public void NextLevel(float _levelTime, int _level, int _levelscore = 100)
     {
-        NormalizeScore(_levelscore, _levelTime);
-        ScoreGUI.text = "Score : " + Mathf.RoundToInt(Score);
-        CurrentTimer = Timer;
-        CurrentScene++;
-        StartCoroutine(FadeInFadeOut(_level));
+        if (CurrentScene <= 14)
+        {
+            NormalizeScore(_levelscore, _levelTime);
+            ScoreGUI.text = "Score : " + Mathf.RoundToInt(Score);
+            CurrentTimer = Timer;
+            CurrentScene++;
+            StartCoroutine(FadeInFadeOut(_level));
+        }
+        else
+        {
+            EndLevel.SetActive(true);
+            ScoreGainGUI.text = " " + Score;
+        }
+        
     }
 
     private IEnumerator FadeInFadeOut(int _level)
@@ -108,7 +120,7 @@ public class GameManager : MonoBehaviour
     }
 
 
-    private void End()
+    public void End()
     {
         if (CurrentScene >= 15)
         {
