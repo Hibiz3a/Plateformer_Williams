@@ -1,3 +1,4 @@
+using System.Collections;
 using UnityEngine;
 
 public class HF_PlayerController : MonoBehaviour
@@ -10,6 +11,8 @@ public class HF_PlayerController : MonoBehaviour
 
     [SerializeField] Rigidbody2D Rb;
     [SerializeField] Transform Transform;
+    [SerializeField] TrailRenderer TrailRenderer;
+    [SerializeField] ParticleSystem PS;
 
     private void Start()
     {
@@ -20,7 +23,7 @@ public class HF_PlayerController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (Input.GetKeyDown(KeyCode.UpArrow) || Input.GetKeyDown(KeyCode.Z))
+        if (Input.GetKeyDown(KeyCode.UpArrow) || Input.GetKeyDown(KeyCode.W))
         {
             Dir = Vector2.up;
         }
@@ -28,7 +31,7 @@ public class HF_PlayerController : MonoBehaviour
         {
             Dir = Vector2.down;
         }
-        else if (Input.GetKeyDown(KeyCode.LeftArrow) || Input.GetKeyDown(KeyCode.Q))
+        else if (Input.GetKeyDown(KeyCode.LeftArrow) || Input.GetKeyDown(KeyCode.A))
         {
             Dir = Vector2.left;
         }
@@ -46,15 +49,46 @@ public class HF_PlayerController : MonoBehaviour
     {
         if (collision.gameObject.CompareTag("HF_HitWall"))
         {
+            PS.transform.position = Transform.position;
+            PS.Play();
+            TrailRenderer.emitting = false;
             Respawn();
-            Debug.Log("!!!!");
         }
+    }
+
+    private void OnTriggerEnter2D(Collider2D collision)
+    {
+        if (collision.gameObject.CompareTag("HF_HitButton1"))
+        {
+            collision.GetComponent<SpriteRenderer>().color = new Color (97f/255f, 97f/255f, 97f/255f);
+            DestroyDoor1();
+        }
+        if (collision.gameObject.CompareTag("HF_HitButton2"))
+        {
+            collision.GetComponent<SpriteRenderer>().color = new Color(97f / 255f, 97f / 255f, 97f / 255f);
+            DestroyDoor2();
+        }
+
     }
 
     private void Respawn()
     {
         transform.position = StartPos;
-        // couper la dernière direction de mouvement
         Dir = Vector2.zero;
+        StartCoroutine(EmittingTrail());
+    }
+    IEnumerator EmittingTrail()
+    {
+        yield return new WaitForSeconds(0.5f);
+        TrailRenderer.emitting = true;
+    }
+
+    private void DestroyDoor1()
+    {
+        Destroy(GameObject.FindWithTag("HF_Door1"));
+    }
+    private void DestroyDoor2()
+    {
+        Destroy(GameObject.FindWithTag("HF_Door2"));
     }
 }
