@@ -21,4 +21,10 @@ public class RaquetteMovement : MonoBehaviour
             m_RaquetteVelocity=-m_RaquetteVelocity;
             m_raquetteRB.velocity= new Vector2(m_RaquetteVelocity, 0);
     }
+    public IEnumerator returnToBaseScale()
+    {
+        yield return new WaitForSeconds(10);
+        transform.localScale = new Vector3(4, 0.25f, 1);
+        yield break;
+    }
 }
