@@ -20,7 +20,7 @@ public class HF_PlayerController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (Input.GetKeyDown(KeyCode.UpArrow) || Input.GetKeyDown(KeyCode.Z))
+        if (Input.GetKeyDown(KeyCode.UpArrow) || Input.GetKeyDown(KeyCode.W))
         {
             Dir = Vector2.up;
         }
@@ -28,7 +28,7 @@ public class HF_PlayerController : MonoBehaviour
         {
             Dir = Vector2.down;
         }
-        else if (Input.GetKeyDown(KeyCode.LeftArrow) || Input.GetKeyDown(KeyCode.Q))
+        else if (Input.GetKeyDown(KeyCode.LeftArrow) || Input.GetKeyDown(KeyCode.A))
         {
             Dir = Vector2.left;
         }
@@ -54,7 +54,7 @@ public class HF_PlayerController : MonoBehaviour
     private void Respawn()
     {
         transform.position = StartPos;
-        // couper la dernière direction de mouvement
+        // couper la derniï¿½re direction de mouvement
         Dir = Vector2.zero;
     }
 }
