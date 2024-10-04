@@ -106,7 +106,6 @@ public class GameManager : MonoBehaviour
         LevelGUI.text = "Niveau : " + _level;
         yield return new WaitForSeconds(2f);
         //CurrentScene++;
-        End();
         SceneManager.LoadScene(CurrentScene);
         for (int i = 0; i < 10; i++)
         {
