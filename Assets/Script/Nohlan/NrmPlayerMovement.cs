@@ -1,3 +1,4 @@
+using Unity.VisualScripting;
 using UnityEngine;
 
 public class NrmPlayerMovement : MonoBehaviour {
@@ -6,7 +7,8 @@ public class NrmPlayerMovement : MonoBehaviour {
     [SerializeField] float JumpForce = 5f;
 
     [SerializeField] LayerMask GroundLayer;
-    [SerializeField] float GroundCheckRadius = 0.2f;
+    [SerializeField] float GroundCheckDistance = 0.2f;
+    [SerializeField] Vector2 CheckSize;
     [SerializeField] Vector2 StartPos;
     [SerializeField] GameObject Border;
 
@@ -22,9 +24,10 @@ public class NrmPlayerMovement : MonoBehaviour {
         float moveInput = Input.GetAxis("Horizontal");
         _body.velocity = new Vector2(moveInput * MoveSpeed, _body.velocity.y);
 
-        _isGrounded = Physics2D.OverlapCircle(transform.position, GroundCheckRadius, GroundLayer);
+        RaycastHit2D hit = Physics2D.BoxCast(transform.position, CheckSize, 0f, Vector2.down, GroundCheckDistance, GroundLayer);
+        _isGrounded = hit.collider != null;
 
-        if (_isGrounded && (Input.GetButtonDown("Jump") || Input.GetKeyDown(KeyCode.UpArrow) || Input.GetKeyDown(KeyCode.Z))){
+        if (_isGrounded && (Input.GetButtonDown("Jump") || Input.GetKeyDown(KeyCode.UpArrow) || Input.GetKeyDown(KeyCode.W))){
             _body.velocity = new Vector2(_body.velocity.x, JumpForce);
             _isGrounded = false;
         }
@@ -35,5 +38,4 @@ public class NrmPlayerMovement : MonoBehaviour {
             transform.position = StartPos;
         }
     }
-
 }
