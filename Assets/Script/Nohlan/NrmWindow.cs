@@ -1,10 +1,10 @@
 using System.Runtime.InteropServices;
-using System.Collections;
+
 using UnityEngine;
 
-public class NrmWindow : MonoBehaviour {
+public class NrmWindow : MonoBehaviour{
     [SerializeField] Camera Camera;
-    [SerializeField]Rigidbody2D PlayerBody;
+    [SerializeField] Rigidbody2D PlayerBody;
     float PixelsPerUnit = 100f;
 
 
@@ -21,7 +21,7 @@ public class NrmWindow : MonoBehaviour {
     const uint SWP_NOSIZE = 0x0001;
 
 
-    void Start(){
+    void Awake() {
         float cameraHeight = 2 * Camera.main.orthographicSize;
         float cameraWidth = cameraHeight * Camera.main.aspect;
 
@@ -33,27 +33,26 @@ public class NrmWindow : MonoBehaviour {
 
         Screen.SetResolution(windowWidthInPixels, windowHeightInPixels, false);
 
-        StartCoroutine(MoveWindow());
+         float cameraFollowSpeed = 5.0f;
+
+        Vector3 targetPosition = new Vector3(PlayerBody.position.x, PlayerBody.position.y, Camera.transform.position.z);
+        Camera.transform.position = Vector3.Lerp(Camera.transform.position, targetPosition, cameraFollowSpeed* Time.fixedDeltaTime);
     }
 
-    IEnumerator MoveWindow(){
+    void LateUpdate() {
+        MoveWindow(PlayerBody.position);
+    }
 
-        
+    void MoveWindow(Vector3 _playerPosition) {
+        Camera.transform.position = new Vector3(PlayerBody.position.x, PlayerBody.position.y, Camera.transform.position.z);
         System.IntPtr gameWindow = FindWindow(null, "Plateformer_Williams");
-        while (true) {
-            Camera.transform.position = new Vector3(PlayerBody.position.x, PlayerBody.position.y, Camera.transform.position.z);
-            if (gameWindow != System.IntPtr.Zero) {
 
-                int gameWindowX = Mathf.RoundToInt((Display.main.systemWidth / 2 - Screen.width / 2) + (PlayerBody.position.x * PixelsPerUnit));
-                int gameWindowY = Mathf.RoundToInt((Display.main.systemHeight / 2 - Screen.height / 2) + (-PlayerBody.position.y * (PixelsPerUnit - 5)));
-                yield return StartCoroutine(SetWindowPosition(gameWindow,gameWindowX,gameWindowY));
-            }
+        if (gameWindow != System.IntPtr.Zero) {
+
+            int gameWindowX = Mathf.RoundToInt((Display.main.systemWidth / 2 - Screen.width / 2) + (_playerPosition.x * PixelsPerUnit));
+            int gameWindowY = Mathf.RoundToInt((Display.main.systemHeight / 2 - Screen.height / 2) + (-_playerPosition.y * (PixelsPerUnit - 5)));
+
+            SetWindowPos(gameWindow, System.IntPtr.Zero, gameWindowX, gameWindowY, 0, 0, SWP_NOSIZE);
         }
-    }
-
-    public static IEnumerator SetWindowPosition(System.IntPtr window, int x, int y){
-        yield return new WaitForEndOfFrame();
-        yield return new WaitForEndOfFrame();
-        SetWindowPos(window, System.IntPtr.Zero, x, y, 0, 0, SWP_NOSIZE);
     }
 }

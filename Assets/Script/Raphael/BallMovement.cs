@@ -13,7 +13,7 @@ public class BallMovement : MonoBehaviour
 
     void Start()
     {
-        FwdDir = -transform.up;
+        FwdDir = transform.up;
         Vector2 norm= FwdDir*BallVelocity;
         BallRB = GetComponent<Rigidbody2D>();
         BallRB.AddForce(norm,ForceMode2D.Impulse);
@@ -24,6 +24,8 @@ public class BallMovement : MonoBehaviour
         if (Input.GetKey(KeyCode.A) || Input.GetKey(KeyCode.LeftArrow) || Input.GetKey(KeyCode.D) || Input.GetKey(KeyCode.RightArrow))
         {
             BallRB.simulated = true;
+            Transform ControlsDisplay=transform.GetChild(0);
+            ControlsDisplay.gameObject.SetActive(false);
         }
         if (BallRB.simulated)
         {

@@ -298,7 +298,8 @@ MonoBehaviour:
   GroundLayer:
     serializedVersion: 2
     m_Bits: 64
-  GroundCheckRadius: 0.2
+  GroundCheckDistance: 0.2
+  CheckSize: {x: 0.5, y: 0.3}
   StartPos: {x: -9.3, y: -4.5}
   Border: {fileID: 1725712904}
 --- !u!1 &649235990
@@ -836,6 +837,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: -4191014929214073320, guid: 9ba69f441f40a99428d7c3d189e98bfe, type: 3}
+      propertyPath: LevelTime
+      value: 35
+      objectReference: {fileID: 0}
     - target: {fileID: 3251714937482085596, guid: 9ba69f441f40a99428d7c3d189e98bfe, type: 3}
       propertyPath: m_LocalPosition.x
       value: 9.033
