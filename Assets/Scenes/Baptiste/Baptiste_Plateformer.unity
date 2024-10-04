@@ -1810,6 +1810,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Power: 40
   MaxPower: 7
+  IsGrounded: 0
 --- !u!1 &1023183528
 GameObject:
   m_ObjectHideFlags: 0

@@ -1,3 +1,4 @@
+using System;
 using UnityEngine;
 using UnityEngine.EventSystems;
 
@@ -12,6 +13,7 @@ public class BD_Player : MonoBehaviour, IPointerUpHandler, IPointerDownHandler, 
     private Vector2 MousePosition;
     private Rigidbody2D RigidBody;
 
+    [SerializeField]
     private bool IsGrounded = false;
 
     private void Start()
@@ -19,14 +21,20 @@ public class BD_Player : MonoBehaviour, IPointerUpHandler, IPointerDownHandler, 
         RigidBody = GetComponent<Rigidbody2D>();
     }
 
+    private void Update()
+    {   
+        Debug.Log(RigidBody);
+    }
+
     public void OnDrag(PointerEventData _eventData)
-    {
+    {   
         //Set New Position Of The Mouse
         //Debug.Log("Drag");
     }
 
     public void OnPointerUp(PointerEventData _eventData)
     {
+        Debug.Log(IsGrounded);
         if (!IsGrounded && RigidBody.velocity != Vector2.zero)
         {
             return;
