@@ -1,12 +1,12 @@
 using UnityEngine;
 
-public class DMKillZone : MonoBehaviour
+public class DMCheckPoint : MonoBehaviour
 {
     private void OnTriggerEnter2D(Collider2D collision)
     {
         if (collision.CompareTag("Player"))
         {
-            collision.GetComponent<DMPlayerController>().death();
+            collision.GetComponent<DMPlayerController>().SetSpawn(transform);
         }
     }
 }

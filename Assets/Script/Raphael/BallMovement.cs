@@ -21,7 +21,7 @@ public class BallMovement : MonoBehaviour
 
     private void Update()
     {
-        if (Input.GetKey(KeyCode.A) || Input.GetKey(KeyCode.LeftArrow) || Input.GetKey(KeyCode.D) || Input.GetKey(KeyCode.RightArrow))
+        if (Input.GetKeyDown(KeyCode.A) || Input.GetKeyDown(KeyCode.LeftArrow) || Input.GetKeyDown(KeyCode.D) || Input.GetKeyDown(KeyCode.RightArrow))
         {
             BallRB.simulated = true;
             Transform ControlsDisplay=transform.GetChild(0);
@@ -77,7 +77,11 @@ public class BallMovement : MonoBehaviour
         }
         if (BallRB.velocity.magnitude ==0)
         {
-            BallRB.velocity = new Vector2(0,2);
+            BallRB.velocity = new Vector2(0,-2);
+        }
+        if(Mathf.Abs(BallRB.velocity.x)<=0.1f && Mathf.Abs(BallRB.velocity.y) <= 0.1f)
+        {
+            BallRB.gameObject.transform.position += new Vector3(-0, -1);
         }
     }
 

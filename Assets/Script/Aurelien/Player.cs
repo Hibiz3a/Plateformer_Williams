@@ -35,7 +35,7 @@ public class Player : MonoBehaviour
 
     private void Deplacement()
     {
-        if (Input.GetKey(KeyCode.Q) || Input.GetKey(KeyCode.LeftArrow))
+        if (Input.GetKey(KeyCode.A) || Input.GetKey(KeyCode.LeftArrow))
         {
             if(!(camTransform.position.x <= minCamX) && camTransform.position.x >= _transform.position.x)
                 camTransform.position = new Vector3(camTransform.position.x - swimingSpeed * Time.deltaTime, camTransform.position.y, -10);
@@ -50,7 +50,7 @@ public class Player : MonoBehaviour
                 transform.position = new Vector2(_transform.position.x + swimingSpeed * Time.deltaTime, _transform.position.y);
         }
         
-        if (Input.GetKey(KeyCode.Z) || Input.GetKey(KeyCode.UpArrow))
+        if (Input.GetKey(KeyCode.W) || Input.GetKey(KeyCode.UpArrow))
         {
             rb.velocity = new Vector2(rb.velocity.x, upAndDownSpeed);
             isSwimingUpOrDown = true;
