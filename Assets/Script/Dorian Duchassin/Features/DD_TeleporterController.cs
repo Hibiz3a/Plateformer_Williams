@@ -6,9 +6,9 @@ namespace DD
     {
         [SerializeField] private Transform destination;
 
-        public Transform GetDestination()
+        public Vector3 GetDestination()
         {
-            return destination;
+            return destination.position;
         }
     }
 }
