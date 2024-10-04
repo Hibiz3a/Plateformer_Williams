@@ -7,7 +7,9 @@ public class GenerationMap : MonoBehaviour
     [SerializeField] private int _width;
     [SerializeField] private int _height;
     [SerializeField] private GameObject _block;
+    [SerializeField] private GameObject _spike;
     [SerializeField] private float _chanceSpawn;
+    [SerializeField] private int _chanceSpawnSpike;
     void Start()
     {
         GenerateMap();
@@ -22,6 +24,15 @@ public class GenerationMap : MonoBehaviour
                 if (Mathf.PerlinNoise(x / 10f + _seed, y / 10f + _seed) >= _chanceSpawn)
                 {
                     Instantiate(_block, new Vector3(x, y), Quaternion.identity, gameObject.transform);
+                }
+                else if (Mathf.PerlinNoise(x / 10f + _seed, (y - 1) / 10f + _seed) >= _chanceSpawn)
+                {
+                    _chanceSpawnSpike++;
+                    if (_chanceSpawnSpike > 10)
+                    {
+                        _chanceSpawnSpike = 0;
+                        Instantiate(_spike, new Vector3(x, y - 0.211f), Quaternion.identity, gameObject.transform);
+                    }
                 }
             }
         }
