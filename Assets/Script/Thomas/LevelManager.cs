@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class LevelManager : MonoBehaviour
 {
@@ -29,10 +30,7 @@ public class LevelManager : MonoBehaviour
         }
         if (!CanMoove)
         {
-            Player.GetComponent<Rigidbody2D>().gravityScale = 0;
-            this.gameObject.transform.position = new Vector3(0, 0, 0);
-            Player.transform.position = new Vector3(-7, -3.5f, 0);
-            Player.GetComponent<Rigidbody2D>().gravityScale = 3;
+            SceneManager.LoadScene("Thomas_Plateformer");
             CanMoove = true;
         }
     }
