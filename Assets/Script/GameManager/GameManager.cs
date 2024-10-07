@@ -77,7 +77,12 @@ public class GameManager : MonoBehaviour
 
     public void NextLevel(float _levelTime, int _level, int _levelscore = 100)
     {
-        if (CurrentScene <= 13)
+        if (_level == 16)
+        {
+            EndLevel.SetActive(true);
+            ScoreGainGUI.text = " " + Score;
+        }
+        else if (CurrentScene <= 13)
         {
             NormalizeScore(_levelscore, _levelTime);
             ScoreGUI.text = "Score : " + Mathf.RoundToInt(Score);
@@ -89,11 +94,7 @@ public class GameManager : MonoBehaviour
                 SkipLevelGO.SetActive(false);
             }
         }
-        else
-        {
-            EndLevel.SetActive(true);
-            ScoreGainGUI.text = " " + Score;
-        }
+        
         
     }
 
@@ -125,7 +126,7 @@ public class GameManager : MonoBehaviour
 
         LevelGUI.text = "Niveau : " + _level;
         yield return new WaitForSeconds(2f);
-        //CurrentScene++;
+
         SceneManager.LoadScene(CurrentScene);
         for (int i = 0; i < 10; i++)
         {
@@ -142,10 +143,7 @@ public class GameManager : MonoBehaviour
 
     public void End()
     {
-        if (CurrentScene >= 15)
-        {
-            Application.Quit();
-        }
+        Application.Quit();
     }
 
     private void NormalizeScore(int _levelScore, float _levelTime)
