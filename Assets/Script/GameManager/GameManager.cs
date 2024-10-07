@@ -13,6 +13,8 @@ public class GameManager : MonoBehaviour
     [SerializeField] private TextMeshProUGUI LevelGUI;
     [SerializeField] private TextMeshProUGUI ScoreGainGUI;
     [SerializeField] private GameObject EndLevel;
+
+    [SerializeField] private GameObject SkipLevelGO;
     
     private float Score = 0f;
     private float Timer = 0f;
@@ -81,6 +83,10 @@ public class GameManager : MonoBehaviour
             CurrentTimer = Timer;
             CurrentScene++;
             StartCoroutine(FadeInFadeOut(_level));
+            if(CurrentScene == 15)
+            {
+                SkipLevelGO.SetActive(false);
+            }
         }
         else
         {
@@ -88,6 +94,16 @@ public class GameManager : MonoBehaviour
             ScoreGainGUI.text = " " + Score;
         }
         
+    }
+
+    public void SkipLevel()
+    {
+        if (CurrentScene <= 14)
+        {
+            CurrentTimer = Timer;
+            CurrentScene++;
+            StartCoroutine(FadeInFadeOut(CurrentScene + 1));
+        }
     }
 
     private IEnumerator FadeInFadeOut(int _level)
