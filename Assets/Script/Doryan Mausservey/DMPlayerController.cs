@@ -38,7 +38,10 @@ public class DMPlayerController : MonoBehaviour
     {
         if (transform.position != SpawnPoint)
         {
-            Instantiate(Corpse, transform.position, transform.rotation);
+            if (transform.position.y > -10)
+            {
+                Instantiate(Corpse, transform.position, transform.rotation);
+            }
         }
         RB2D.velocity = Vector2.zero;
         transform.position = SpawnPoint;
