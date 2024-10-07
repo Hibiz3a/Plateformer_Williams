@@ -77,14 +77,14 @@ public class GameManager : MonoBehaviour
 
     public void NextLevel(float _levelTime, int _level, int _levelscore = 100)
     {
-        if (CurrentScene <= 14)
+        if (CurrentScene <= 13)
         {
             NormalizeScore(_levelscore, _levelTime);
             ScoreGUI.text = "Score : " + Mathf.RoundToInt(Score);
             CurrentTimer = Timer;
             CurrentScene++;
             StartCoroutine(FadeInFadeOut(_level));
-            if(CurrentScene == 15)
+            if(CurrentScene > 13)
             {
                 SkipLevelGO.SetActive(false);
             }
@@ -99,9 +99,9 @@ public class GameManager : MonoBehaviour
 
     public void SkipLevel()
     {
-        if (canChangeLevel || CurrentScene > 14)
+        if (canChangeLevel || CurrentScene > 13)
             return;
-        if (CurrentScene <= 14)
+        if (CurrentScene <= 13)
         {
             canChangeLevel = true;
             CurrentTimer = Timer;
