@@ -1,11 +1,13 @@
 using JetBrains.Annotations;
 using System.Collections;
+using TMPro;
 using UnityEngine;
 
 public class MG_Player : MonoBehaviour
 {
     [SerializeField] public MG_End end;
     [SerializeField] public MG_ObstacleManager obstacleManager;
+    [SerializeField] public GameObject textIndic;
     public float MoveSpeed = 5f;
     public Vector3 InitPos;
 
@@ -25,6 +27,7 @@ public class MG_Player : MonoBehaviour
     {
         InitPos = transform.position;
         rb = GetComponent<Rigidbody2D>();
+        Destroy(textIndic, 1.5f);
     }
 
     private void FixedUpdate()
