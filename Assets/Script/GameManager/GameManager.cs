@@ -22,6 +22,7 @@ public class GameManager : MonoBehaviour
     private int CurrentScene = 0;
     private bool NewLevel = false;
     public static GameManager Instance;
+    private bool canChangeLevel;
 
     public float _score
     {
@@ -98,8 +99,11 @@ public class GameManager : MonoBehaviour
 
     public void SkipLevel()
     {
+        if (canChangeLevel)
+            return;
         if (CurrentScene <= 14)
         {
+            canChangeLevel = true;
             CurrentTimer = Timer;
             CurrentScene++;
             StartCoroutine(FadeInFadeOut(CurrentScene + 1));
@@ -132,6 +136,7 @@ public class GameManager : MonoBehaviour
             yield return new WaitForSeconds(0.05f);
         }
         NewLevel = true;
+        canChangeLevel = false;
     }
 
 
