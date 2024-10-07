@@ -99,7 +99,7 @@ public class GameManager : MonoBehaviour
 
     public void SkipLevel()
     {
-        if (canChangeLevel)
+        if (canChangeLevel || CurrentScene > 14)
             return;
         if (CurrentScene <= 14)
         {
