@@ -43,8 +43,10 @@ public class SD_movement : MonoBehaviour
 
     private void CheckIsGrounded()
     {
-        RaycastHit2D hit = Physics2D.Raycast(Collider.transform.position - RayCastOffset, Vector2.down, Collider.size.y/2);
-        if (hit.collider != null)
+        RaycastHit2D hit1 = Physics2D.Raycast(Collider.transform.position - RayCastOffset, Vector2.down, Collider.size.y/2);
+        RaycastHit2D hit2 = Physics2D.Raycast(Collider.transform.position - RayCastOffset - new Vector3(Collider.size.x/2, 0, 0), Vector2.down, Collider.size.y/2);
+        RaycastHit2D hit3 = Physics2D.Raycast(Collider.transform.position - RayCastOffset + new Vector3(Collider.size.x / 2, 0, 0), Vector2.down, Collider.size.y/2);
+        if (hit1.collider != null || hit2.collider != null || hit3.collider != null)
         {
             IsGrounded = true;
         }

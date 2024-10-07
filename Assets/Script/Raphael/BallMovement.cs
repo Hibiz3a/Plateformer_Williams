@@ -21,7 +21,7 @@ public class BallMovement : MonoBehaviour
 
     private void Update()
     {
-        if (Input.GetKey(KeyCode.A) || Input.GetKey(KeyCode.LeftArrow) || Input.GetKey(KeyCode.D) || Input.GetKey(KeyCode.RightArrow))
+        if (Input.GetKeyDown(KeyCode.A) || Input.GetKeyDown(KeyCode.LeftArrow) || Input.GetKeyDown(KeyCode.D) || Input.GetKeyDown(KeyCode.RightArrow))
         {
             BallRB.simulated = true;
             Transform ControlsDisplay=transform.GetChild(0);
@@ -57,36 +57,12 @@ public class BallMovement : MonoBehaviour
         }
         if (BallRB.velocity.x >= 5)
         {
-<<<<<<< Updated upstream
-            BallRB.velocity = new Vector2(BallRB.velocity.x, -3);
-        }
-        else if(BallRB.velocity.y < -6)
-        {
-            BallRB.velocity = new Vector2(BallRB.velocity.x, -6);
-        }
-        else if (BallRB.velocity.y > 6)
-        {
-            BallRB.velocity = new Vector2(BallRB.velocity.x, 6);
-        }
-        if (BallRB.velocity.x > 6)
-        {
-            BallRB.velocity = new Vector2(6, BallRB.velocity.y);
-        }
-        else if (BallRB.velocity.x <-6)
-        {
-            BallRB.velocity = new Vector2(-6, BallRB.velocity.y);
-        }
-        if (BallRB.velocity.magnitude ==0)
-        {
-            BallRB.velocity = new Vector2(0,2);
-        }
-        if(Mathf.Abs(BallRB.velocity.x)<0.1f && Mathf.Abs(BallRB.velocity.y) < 0.1f)
-        {
-            transform.position = new Vector3(transform.position.x, transform.position.y - 2, transform.position.z);
-=======
             BallRB.velocity = new Vector2(5, BallRB.velocity.y);
->>>>>>> Stashed changes
         }
+        //if(Mathf.Abs(BallRB.velocity.x) <= 0.1f && Mathf.Abs(BallRB.velocity.y) <= 0.1f)
+        //{
+          //  transform.position = new Vector3(transform.position.x, transform.position.y - 4, transform.position.z);
+        //}
     }
 
 }

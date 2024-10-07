@@ -1809,7 +1809,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: -4191014929214073320, guid: 9ba69f441f40a99428d7c3d189e98bfe, type: 3}
       propertyPath: Level
-      value: 0
+      value: 16
       objectReference: {fileID: 0}
     - target: {fileID: -4191014929214073320, guid: 9ba69f441f40a99428d7c3d189e98bfe, type: 3}
       propertyPath: LevelTime
@@ -5154,7 +5154,7 @@ MonoBehaviour:
   IsOnFirstPlatform: 0
   FeetPos: {fileID: 823831745}
   CheckRadius: 0.3
-  JumpForce: 8
+  JumpForce: 9
   WhatIsGround:
     serializedVersion: 2
     m_Bits: 256

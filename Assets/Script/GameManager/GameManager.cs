@@ -11,7 +11,11 @@ public class GameManager : MonoBehaviour
     [SerializeField] private TextMeshProUGUI ScoreGUI;
     [SerializeField] private TextMeshProUGUI TimeGUI;
     [SerializeField] private TextMeshProUGUI LevelGUI;
+    [SerializeField] private TextMeshProUGUI ScoreGainGUI;
+    [SerializeField] private GameObject EndLevel;
 
+    [SerializeField] private GameObject SkipLevelGO;
+    
     private float Score = 0f;
     private float Timer = 0f;
     private float CurrentTimer = 0f;
@@ -33,6 +37,7 @@ public class GameManager : MonoBehaviour
 
     void Start()
     {
+        EndLevel.SetActive(false);
         ScoreGUI.text = "Score : " + Mathf.RoundToInt(Score);
         TimeGUI.text = "Time : " + CurrentTimer;
         LevelGUI.text = "Niveau : " + 1;
@@ -71,11 +76,34 @@ public class GameManager : MonoBehaviour
 
     public void NextLevel(float _levelTime, int _level, int _levelscore = 100)
     {
-        NormalizeScore(_levelscore, _levelTime);
-        ScoreGUI.text = "Score : " + Mathf.RoundToInt(Score);
-        CurrentTimer = Timer;
-        CurrentScene++;
-        StartCoroutine(FadeInFadeOut(_level));
+        if (CurrentScene <= 14)
+        {
+            NormalizeScore(_levelscore, _levelTime);
+            ScoreGUI.text = "Score : " + Mathf.RoundToInt(Score);
+            CurrentTimer = Timer;
+            CurrentScene++;
+            StartCoroutine(FadeInFadeOut(_level));
+            if(CurrentScene == 15)
+            {
+                SkipLevelGO.SetActive(false);
+            }
+        }
+        else
+        {
+            EndLevel.SetActive(true);
+            ScoreGainGUI.text = " " + Score;
+        }
+        
+    }
+
+    public void SkipLevel()
+    {
+        if (CurrentScene <= 14)
+        {
+            CurrentTimer = Timer;
+            CurrentScene++;
+            StartCoroutine(FadeInFadeOut(CurrentScene + 1));
+        }
     }
 
     private IEnumerator FadeInFadeOut(int _level)
@@ -94,7 +122,6 @@ public class GameManager : MonoBehaviour
         LevelGUI.text = "Niveau : " + _level;
         yield return new WaitForSeconds(2f);
         //CurrentScene++;
-        End();
         SceneManager.LoadScene(CurrentScene);
         for (int i = 0; i < 10; i++)
         {
@@ -108,7 +135,7 @@ public class GameManager : MonoBehaviour
     }
 
 
-    private void End()
+    public void End()
     {
         if (CurrentScene >= 15)
         {

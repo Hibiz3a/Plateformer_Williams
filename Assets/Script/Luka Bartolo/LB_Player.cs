@@ -27,20 +27,23 @@ public class LB_Player : MonoBehaviour
             _rb.AddForce(Vector2.right * MouvementSpeed);
         }
         SpeedParticles();
+
+        /*print(_rb.velocity.y);*/
+        print(_speedParticles.isPlaying);
     }
 
     void SpeedParticles()
     {
         var _particlesMainSettings = _speedParticles.main;
-        if (_rb.velocity.y <= 20)
-        {
-            _speedParticles.Stop();
-            _particlesMainSettings.startLifetime = 0.2f;
-        }
-        else
+        if (_rb.velocity.y > 20)
         {
             _speedParticles.Play();
             _particlesMainSettings.startLifetime = _rb.velocity.y / 100;
+        }
+        else
+        {
+            _speedParticles.Stop();
+            _particlesMainSettings.startLifetime = 0.2f;
         }
     }
 }
