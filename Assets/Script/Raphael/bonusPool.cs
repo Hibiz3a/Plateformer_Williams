@@ -28,7 +28,7 @@ public class bonusPool : MonoBehaviour
     {
         RaquetteMovement raq = Object.FindObjectOfType<RaquetteMovement>();
         raq.transform.localScale= new Vector3(6, raq.transform.localScale.y, raq.transform.localScale.z);
-        StartCoroutine(raq.returnToBaseScale());
+        raq.growned = true;
     }
 
 }

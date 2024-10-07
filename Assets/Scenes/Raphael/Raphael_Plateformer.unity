@@ -606,7 +606,7 @@ Rigidbody2D:
   m_LinearDrag: 0
   m_AngularDrag: 0
   m_GravityScale: 0
-  m_Material: {fileID: 0}
+  m_Material: {fileID: 6200000, guid: 045164ece18b95a42b73de5a78d48e82, type: 2}
   m_IncludeLayers:
     serializedVersion: 2
     m_Bits: 0
@@ -5872,6 +5872,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_raquetteRB: {fileID: 1948677611}
+  growned: 0
 --- !u!50 &1948677611
 Rigidbody2D:
   serializedVersion: 4
