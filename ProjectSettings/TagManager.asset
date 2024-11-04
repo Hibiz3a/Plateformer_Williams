@@ -4,12 +4,6 @@
 TagManager:
   serializedVersion: 2
   tags:
-  - Thomas_Ground
-  - IsGround
-  - Teleporter
-  - BouncePad
-  - Exit
-  - Floor
   - HF_EnterMaze
   - HF_HitWall
   - HF_Door1
@@ -20,19 +14,14 @@ TagManager:
   - Default
   - TransparentFX
   - Ignore Raycast
-  - Nathan_Ground
+  - 
   - Water
   - UI
   - 
-  - Nathan_Kill
-  - Ground
-  - 
-  - Culling Player
   - 
   - 
-  - Ground
   - 
-  - Ground
+  - 
   - 
   - 
   - 
