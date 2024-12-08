@@ -1,5 +1,6 @@
 using System.Collections;
 using UnityEngine;
+using UnityEngine.InputSystem;
 
 public class HF_PlayerController : MonoBehaviour
 {
@@ -14,16 +15,36 @@ public class HF_PlayerController : MonoBehaviour
     [SerializeField] TrailRenderer TrailRenderer;
     [SerializeField] ParticleSystem PS;
 
+    private PlayerInputs playerInputs;
+    private InputAction moveInputs;
+
+    private void Awake()
+    {
+        playerInputs = new PlayerInputs();
+        moveInputs = playerInputs.Player.Movements;
+    }
+
+    private void OnEnable()
+    {
+        moveInputs.Enable();
+    }
+
+    private void OnDisable()
+    {
+        moveInputs.Disable();
+    }
+
     private void Start()
     {
         Rb = GetComponent<Rigidbody2D>();
         StartPos = transform.position;
+        moveInputs.performed += ChangeDirection;
     }
 
     // Update is called once per frame
     void Update()
     {
-        if (Input.GetKeyDown(KeyCode.UpArrow) || Input.GetKeyDown(KeyCode.W))
+        /*if (Input.GetKeyDown(KeyCode.UpArrow) || Input.GetKeyDown(KeyCode.W))
         {
             Dir = Vector2.up;
         }
@@ -38,7 +59,12 @@ public class HF_PlayerController : MonoBehaviour
         else if (Input.GetKeyDown(KeyCode.RightArrow) || Input.GetKeyDown(KeyCode.D))
         {
             Dir = Vector2.right;
-        }
+        }*/
+    }
+
+    private void ChangeDirection(InputAction.CallbackContext ctx)
+    {
+        Dir = ctx.ReadValue<Vector2>();
     }
 
     private void FixedUpdate()

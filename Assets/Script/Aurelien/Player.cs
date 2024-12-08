@@ -52,8 +52,6 @@ public class Player : MonoBehaviour
 
     void Update()
     {
-        //Deplacement();
-
         MovementsInX();
         MovementsInY();
 
@@ -75,11 +73,8 @@ public class Player : MonoBehaviour
     {
         if (direction.x == 0) { return; }
 
-        print(direction.x);
-
         if (direction.x < 0)
         {
-            print("a");
             if (!(camTransform.position.x <= minCamX) && camTransform.position.x >= selfTransform.position.x)
             {
                 CameraDeplacementsInX(-1);
@@ -90,8 +85,6 @@ public class Player : MonoBehaviour
             }
             return;
         }
-
-        print("b");
 
         if (!(camTransform.position.x >= maxCamX) && camTransform.position.x <= selfTransform.position.x)
         {
@@ -144,37 +137,4 @@ public class Player : MonoBehaviour
     }
 
     #endregion
-    private void Deplacement()
-    {
-        if (Input.GetKey(KeyCode.A) || Input.GetKey(KeyCode.LeftArrow))
-        {
-            if (!(camTransform.position.x <= minCamX) && camTransform.position.x >= selfTransform.position.x)
-                camTransform.position = new Vector3(camTransform.position.x - swimingSpeed * Time.deltaTime, camTransform.position.y, -10);
-            else
-                transform.position = new Vector2(selfTransform.position.x - swimingSpeed * Time.deltaTime, selfTransform.position.y);
-        }
-        else if (Input.GetKey(KeyCode.D) || Input.GetKey(KeyCode.RightArrow))
-        {
-            if (!(camTransform.position.x >= maxCamX) && camTransform.position.x <= selfTransform.position.x)
-                camTransform.position = new Vector3(camTransform.position.x + swimingSpeed * Time.deltaTime, camTransform.position.y, -10);
-            else
-                transform.position = new Vector2(selfTransform.position.x + swimingSpeed * Time.deltaTime, selfTransform.position.y);
-        }
-
-        if (Input.GetKey(KeyCode.W) || Input.GetKey(KeyCode.UpArrow))
-        {
-            rb.velocity = new Vector2(rb.velocity.x, upAndDownSpeed);
-            isSwimingVerticaly = true;
-        }
-        else if (Input.GetKey(KeyCode.S) || Input.GetKey(KeyCode.DownArrow))
-        {
-            rb.velocity = new Vector2(rb.velocity.x, -(upAndDownSpeed));
-            isSwimingVerticaly = true;
-        }
-        else
-        {
-            isSwimingVerticaly = false;
-        }
-    }
-
 }
