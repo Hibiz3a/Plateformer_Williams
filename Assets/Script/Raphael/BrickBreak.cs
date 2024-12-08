@@ -6,6 +6,7 @@ using UnityEngine;
 
 public class BrickBreak : BrickList
 {
+    
     protected override void Start()
     {
         End = null;
@@ -15,10 +16,15 @@ public class BrickBreak : BrickList
         if (_collision.gameObject.CompareTag("Player"))
         {
 
-            GetComponentInParent<BrickList>();
+            BrickList Parent = transform.parent.gameObject.GetComponent<BrickList>();
             gameObject.SetActive(false);
             VerifyBrickActive();
-            
+            int chance = Random.Range(0, 100);
+            if (chance > 45)
+            {
+                Instantiate(Parent.boostPrefab, transform.position,Parent.boostPrefab.transform.rotation);
+            }
+
         }
     }
     protected override void VerifyBrickActive()

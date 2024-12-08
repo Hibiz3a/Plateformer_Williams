@@ -11,13 +11,18 @@ public class GameManager : MonoBehaviour
     [SerializeField] private TextMeshProUGUI ScoreGUI;
     [SerializeField] private TextMeshProUGUI TimeGUI;
     [SerializeField] private TextMeshProUGUI LevelGUI;
+    [SerializeField] private TextMeshProUGUI ScoreGainGUI;
+    [SerializeField] private GameObject EndLevel;
 
+    [SerializeField] private GameObject SkipLevelGO;
+    
     private float Score = 0f;
     private float Timer = 0f;
     private float CurrentTimer = 0f;
     private int CurrentScene = 0;
     private bool NewLevel = false;
     public static GameManager Instance;
+    private bool canChangeLevel;
 
     public float _score
     {
@@ -33,6 +38,7 @@ public class GameManager : MonoBehaviour
 
     void Start()
     {
+        EndLevel.SetActive(false);
         ScoreGUI.text = "Score : " + Mathf.RoundToInt(Score);
         TimeGUI.text = "Time : " + CurrentTimer;
         LevelGUI.text = "Niveau : " + 1;
@@ -71,11 +77,38 @@ public class GameManager : MonoBehaviour
 
     public void NextLevel(float _levelTime, int _level, int _levelscore = 100)
     {
-        NormalizeScore(_levelscore, _levelTime);
-        ScoreGUI.text = "Score : " + Mathf.RoundToInt(Score);
-        CurrentTimer = Timer;
-        CurrentScene++;
-        StartCoroutine(FadeInFadeOut(_level));
+        if (_level == 16)
+        {
+            EndLevel.SetActive(true);
+            ScoreGainGUI.text = " " + Score;
+        }
+        else if (CurrentScene <= 13)
+        {
+            NormalizeScore(_levelscore, _levelTime);
+            ScoreGUI.text = "Score : " + Mathf.RoundToInt(Score);
+            CurrentTimer = Timer;
+            CurrentScene++;
+            StartCoroutine(FadeInFadeOut(_level));
+            if(CurrentScene > 13)
+            {
+                SkipLevelGO.SetActive(false);
+            }
+        }
+        
+        
+    }
+
+    public void SkipLevel()
+    {
+        if (canChangeLevel || CurrentScene > 13)
+            return;
+        if (CurrentScene <= 13)
+        {
+            canChangeLevel = true;
+            CurrentTimer = Timer;
+            CurrentScene++;
+            StartCoroutine(FadeInFadeOut(CurrentScene + 1));
+        }
     }
 
     private IEnumerator FadeInFadeOut(int _level)
@@ -93,8 +126,7 @@ public class GameManager : MonoBehaviour
 
         LevelGUI.text = "Niveau : " + _level;
         yield return new WaitForSeconds(2f);
-        //CurrentScene++;
-        End();
+
         SceneManager.LoadScene(CurrentScene);
         for (int i = 0; i < 10; i++)
         {
@@ -105,15 +137,13 @@ public class GameManager : MonoBehaviour
             yield return new WaitForSeconds(0.05f);
         }
         NewLevel = true;
+        canChangeLevel = false;
     }
 
 
-    private void End()
+    public void End()
     {
-        if (CurrentScene >= 15)
-        {
-            Application.Quit();
-        }
+        Application.Quit();
     }
 
     private void NormalizeScore(int _levelScore, float _levelTime)

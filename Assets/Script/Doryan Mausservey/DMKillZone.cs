@@ -6,7 +6,6 @@ public class DMKillZone : MonoBehaviour
     {
         if (collision.CompareTag("Player"))
         {
-            Debug.Log("i died");
             collision.GetComponent<DMPlayerController>().death();
         }
     }

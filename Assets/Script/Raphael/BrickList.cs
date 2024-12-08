@@ -7,6 +7,7 @@ public class BrickList : MonoBehaviour
 {
     public List<GameObject> AllBricks = new List<GameObject>();
     public GameObject End;
+    [SerializeField] public GameObject boostPrefab;
     protected virtual void Start()
     {
         for(int i=0; i < transform.childCount; i++)

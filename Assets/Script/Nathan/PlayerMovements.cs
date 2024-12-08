@@ -12,6 +12,7 @@ public class PlayerMovements : MonoBehaviour
     public LayerMask killLayer;
     public Transform groundCheck;
     public float moveSpeed = 2;
+    public Animator Nathananimator;
 
     void Start()
     {
@@ -32,6 +33,7 @@ public class PlayerMovements : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.Space) && isGrounded)
         {
             nathanrb.velocity = new Vector2(nathanrb.velocity.x, 3.0f);
+            Nathananimator.SetTrigger("IsJumping");
         }
     }
 
